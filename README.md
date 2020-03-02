@@ -63,7 +63,7 @@ open http://localhost:5000
 
 ## VueJS Frontend located in ChadevMonsterUI
 
-You will need to install vue and make sure you can run Vue UI priort to the next step.
+You will need to install vue and make sure you can run Vue UI prior to the next step.
 
 ```
 cd ChadevMonsterUI
