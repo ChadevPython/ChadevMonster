@@ -18,8 +18,8 @@ class ApiView(FlaskView):
         articles = Article.query.all()
         return jsonify([
             {
-                'title': article_title,
-                'url':  article.article_url,
+                'title': article.article_title,
+                'url': article.article_url,
             }
-            for article in  articles
+            for article in articles
         ])        
