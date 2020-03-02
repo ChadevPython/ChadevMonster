@@ -16,9 +16,10 @@ class ApiView(FlaskView):
         """Get all article records."""
 
         articles = Article.query.all()
-
-        articles_dict = []
-        for article in articles:
-            articles_dict.append({"title": article.article_title, "url": article.article_url})
-
-        return jsonify(articles_dict)
+        return jsonify([
+            {
+                'title': article_title,
+                'url':  article.article_url,
+            }
+            for article in  articles
+        ])        
