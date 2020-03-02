@@ -1,0 +1,8 @@
+Dear {{ mail.email }},
+
+Your donation file submission has processed
+
+New Submission Stats
+Total number of records uploaded: {{ mail.new_donations_count }}
+Total value of newly uploaded donations: {{ mail.new_donations_sum }}
+Percentage of Anonymous donations: {{ mail.anonymous_donations_percentages }}

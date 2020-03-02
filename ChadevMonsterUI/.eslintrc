@@ -1,0 +1,64 @@
+{
+    "root": true,
+    "env": {
+        "browser": true,
+        "commonjs": true,
+        "es6": true,
+        "node": true
+    },
+    "parserOptions": {
+        "ecmaVersion": 6,
+        "parser": "babel-eslint",
+        "ecmaFeatures": {
+            "jsx": true,
+            "modules": true
+        },
+        "sourceType": "module"
+    },
+    "extends": [
+        "prettier",
+        "prettier/standard",
+        "plugin:vue/recommended"
+    ],
+    "plugins": [
+        "@vue",
+        "babel",
+        "prettier"
+    ],
+    "rules": {
+        "no-const-assign": "warn",
+        "no-this-before-super": "warn",
+        "no-undef": "warn",
+        "no-unreachable": "warn",
+        "no-unused-vars": "warn",
+        "constructor-super": "warn",
+        "valid-typeof": "warn",
+        "vue/html-indent": "off",
+        "vue/max-attributes-per-line": "off",
+        "vue/this-in-template": "off",
+        "vue/singleline-html-element-content-newline": "off",
+        "no-unexpected-multiline": "error",
+        "semi": [
+            "error",
+            "never"
+        ],
+        "prettier/prettier": [
+            "error",
+            {
+                "doubleQuote": true,
+                "semi": false,
+                "printWidth": 120
+            }
+        ],
+        "vue/html-self-closing": [
+            "error",
+            {
+                "html": {
+                    "normal": "never",
+                    "void": "always"
+                }
+            }
+        ],
+        "vue/html-closing-bracket-spacing": "off"
+    }
+}
