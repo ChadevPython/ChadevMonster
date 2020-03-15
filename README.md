@@ -30,7 +30,7 @@ cd chadevmonster
 ### Install python packages
 
 ```
-pip install -r pip.txt
+pip install -r requirements/dev.txt
 ```
 
 ### Set dev environment variable
@@ -43,6 +43,9 @@ export ENVIRONMENT="dev"
 ### Set config file
 
 copy/rename config/example-dev.py to config/dev.py
+```
+cp config/example-dev.py config/dev.py
+```
 
 ### Create the database and upgrade the database with the latest migrations
 

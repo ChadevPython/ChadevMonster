@@ -14,11 +14,7 @@ class ModelMixin(object):
     """
 
     def __repr__(self):
-        return str(self.__dict__)
-
-    def save(self):
-        """ Save instance to database.
-        """
+        return f'<{self.class_name}> {self.__dict__}'
         db.session.add(self)
         db.session.commit()
 
