@@ -2,7 +2,7 @@
 
 from flask import jsonify
 from flask_classy import FlaskView, route
-from chadevmonster import csrf, app
+
 from chadevmonster.models.article import Article
 
 __all__ = "ApiView"
@@ -22,4 +22,4 @@ class ApiView(FlaskView):
                 'url': article.article_url,
             }
             for article in articles
-        ])        
+        ])
