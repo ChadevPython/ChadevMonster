@@ -1,0 +1,6 @@
+-r base.txt
+black
+flake8
+ipython
+ipython-genutils
+nose
