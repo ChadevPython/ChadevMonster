@@ -15,6 +15,8 @@ class ModelMixin(object):
 
     def __repr__(self):
         return f'<{self.class_name}> {self.__dict__}'
+
+    def save(self):
         db.session.add(self)
         db.session.commit()
 

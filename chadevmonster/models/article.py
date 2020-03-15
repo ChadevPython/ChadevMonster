@@ -2,7 +2,7 @@
 
 from arrow import utcnow
 from sqlalchemy_utils import ArrowType
-from sqlalchemy import Column, Integer, Boolean, Numeric
+from sqlalchemy import Column, Integer
 from chadevmonster import db
 from chadevmonster.models import ModelMixin
 
