@@ -3,7 +3,7 @@
 import logging
 from flask_cors import CORS
 
-from flask_wtf.csrf import CSRFProtect
+# from flask_wtf.csrf import CSRFProtect
 from flask import Flask
 from flask_debugtoolbar import DebugToolbarExtension
 from flask_sqlalchemy import SQLAlchemy
@@ -28,7 +28,7 @@ app.config["MAIL_DEFAULT_SENDER"] = config.MAIL_DEFAULT_SENDER
 app.config["MAIL_SERVER"] = config.MAIL_SERVER
 app.config["MAIL_PORT"] = config.MAIL_PORT
 
-csrf = CSRFProtect(app)
+# csrf = CSRFProtect(app)
 db = SQLAlchemy(app)
 mail = Mail(app)
 # enable CORS
