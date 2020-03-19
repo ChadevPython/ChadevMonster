@@ -19,7 +19,6 @@ jobs:
         python -m pip install --upgrade pip
         pip install -r requirements/dev.txt
     - name: Coverage report
-      run: |
-        env:
-            ENVIRONMENT: dev
-        python manage.py cov
+      env:
+        ENVIRONMENT: dev
+      run: python manage.py cov
