@@ -9,8 +9,6 @@ venv/
 *.DS_Store
 /.webassets-cache/*
 fabfile.py
-dev.py
-prod.py
 notes/
 notes.txt
 coverage/
