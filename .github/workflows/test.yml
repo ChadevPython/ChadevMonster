@@ -22,4 +22,4 @@ jobs:
       env:
         ENVIRONMENT: test
       run: |
-        nosetests -v
+        python manage.py test
