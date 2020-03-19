@@ -1,3 +1,6 @@
+![Tests](https://github.com/ChadevPython/ChadevMonster/workflows/Tests/badge.svg)
+
+
 # ChadevMonster
 A web application to manage article submissions that are posted to /r/chadev and the Chadev slack.
 

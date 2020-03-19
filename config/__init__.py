@@ -13,8 +13,13 @@ file exists then use that file as config settings, otherwise pull in settings fr
 if os.environ.get("ENVIRONMENT") == "dev":
     try:
         import config.dev as config  # config/dev.py
-    except:
+    except Exception:
         raise EnvironmentError("Please create config/dev.py")
+elif os.environ.get("ENVIRONMENT") == "test":
+    try:
+        import config.test as config  # config/test.py
+    except Exception:
+        raise EnvironmentError("Please create config/test.py")
 else:
     # production server environment variables
     import config.prod as config  # config/prod.py

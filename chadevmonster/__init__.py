@@ -21,6 +21,8 @@ app.config["PROPAGATE_EXCEPTIONS"] = True
 app.config["SQLALCHEMY_DATABASE_URI"] = config.DATABASE_URI
 app.config["SQLALCHEMY_TRACK_MODIFICATIONS"] = False
 app.debug = config.DEBUG
+if app.config.get('TESTING'):
+    app.testing = True
 
 app.config["MAIL_USERNAME"] = config.MAIL_USERNAME
 app.config["MAIL_PASSWORD"] = config.MAIL_PASSWORD
@@ -31,6 +33,7 @@ app.config["MAIL_PORT"] = config.MAIL_PORT
 # csrf = CSRFProtect(app)
 db = SQLAlchemy(app)
 mail = Mail(app)
+
 # enable CORS
 CORS(app)
 

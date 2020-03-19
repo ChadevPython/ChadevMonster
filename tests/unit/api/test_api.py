@@ -7,8 +7,6 @@ from chadevmonster.models.article import Article
 class ApiTests(unittest.TestCase):
 
     def setUp(self):
-        app.config['SQLALECHEMY_DATABASE_URI'] = 'sqlite.//'
-        app.testing = True
         self.client = app.test_client()
         db.create_all()
 

@@ -101,9 +101,12 @@ def test():
     Ran by: python manage.py test
     '''
     import unittest
+    import sys
 
     tests = unittest.TestLoader().discover('tests')
-    unittest.TextTestRunner(verbosity=2).run(tests)
+    results = unittest.TextTestRunner(verbosity=2).run(tests)
+    if results.failures or results.errors:
+        sys.exit(1)
 
 
 @manager.command
