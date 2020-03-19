@@ -20,4 +20,6 @@ jobs:
         pip install -r requirements/dev.txt
     - name: Test with unittest
       run: |
+        env:
+            ENVIRONMENT: dev
         python manage.py test
