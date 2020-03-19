@@ -1,5 +1,6 @@
 -r base.txt
 black
+coverage
 flake8
 ipython
 ipython-genutils

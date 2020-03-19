@@ -2,12 +2,12 @@
 # -*- coding: utf-8 -*-
 
 import os
-from flask_script import Server, Manager, Shell, Command, Option, prompt_bool, prompt
+from flask_script import Server, Manager, Shell, prompt_bool
 from flask_migrate import Migrate, MigrateCommand
 from flask import url_for
 from sqlalchemy_utils.functions import create_database, database_exists
 from chadevmonster import db
-from chadevmonster import app, mail
+from chadevmonster import app
 from chadevmonster.models.article import Article
 
 migrate = Migrate(app, db)
@@ -114,17 +114,20 @@ def cov():
     '''Runs the unit tests with coverage.
     Ran by: python manage.py cov
     '''
-    cov = coverage.coverage(branch=True, include='cis/*')
+    cov = coverage.Coverage(branch=True, source=['./chadevmonster'])
     cov.start()
     tests = unittest.TestLoader().discover('tests')
     unittest.TextTestRunner(verbosity=2).run(tests)
     cov.stop()
     cov.save()
     print('Coverage Summary:')
-    cov.report()
-    basedir = os.path.abspath(os.path.dirname(__file__))
-    covdir = os.path.join(basedir, 'coverage')
-    cov.html_report(directory=covdir)
+    try:
+        cov.report()
+        basedir = os.path.abspath(os.path.dirname(__file__))
+        covdir = os.path.join(basedir, 'coverage')
+        cov.html_report(directory=covdir)
+    except coverage.misc.CoverageException as e:
+        print(e)
     cov.erase()
 
 
