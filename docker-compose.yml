@@ -1,0 +1,43 @@
+version: '3.7'
+services:
+  postgres:
+    image: postgres:12.1-alpine
+    expose:
+      - 5432
+    environment:
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=postgres
+  server:
+    build:
+      context: ./
+      dockerfile: Dockerfile
+    ports:
+      - 5000:5000
+    environment:
+      - FLASK_ENV=development
+      - APP_SETTINGS=project.config.DevelopmentConfig
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=postgres
+      - ENVIRONMENT=dev
+    depends_on:
+      - postgres
+  migration:
+    image: chadevmonster_server
+    # Ping added so we wait for the DB to be online
+    command: >
+      sh -c "ping -c 10 postgres &&
+             python manage.py create_db &&
+             python manage.py db upgrade"
+    depends_on:
+      - server
+      - postgres
+  vue:
+    build:
+      context: ./ChadevMonsterUI/
+      dockerfile: Dockerfile
+    ports:
+      - 8080:8080
+    depends_on:
+      - migration
+      - postgres
+      - server

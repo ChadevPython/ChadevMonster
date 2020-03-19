@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 
 APP_SECRET_KEY = "some secret key"
-DATABASE_URI = "postgresql:///chadevmonster?client_encoding=utf8"
+DATABASE_URI = "postgresql://postgres:postgres@postgres/chadevmonster"
 PORT = 5000
 DEBUG = True
 # running in dev environment, use gmail account below
