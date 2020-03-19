@@ -1,22 +1,28 @@
 <template>
     <v-layout justify-center>
-        <v-dialog v-model="uploadDialog" persistent max-width="600px">
+        <v-dialog v-model="articleDialog" persistent max-width="600px">
             <v-card>
                 <v-card-title>
-                    <span class="headline">New Donations</span>
+                    <span class="headline">New Article</span>
                 </v-card-title>
-                <v-subheader>Please upload new donations in a csv file format only.</v-subheader>
                 <v-card-text>
+                    <v-subheader>All submissions are subject to approval</v-subheader>
                     <v-container grid-list-md>
                         <v-layout wrap>
                             <v-flex xs12>
                                 <v-form ref="form" enctype="multipart/form-data">
                                     <v-flex>
                                         <v-text-field
-                                            v-model="email"
-                                            label="Email"
-                                            hint="A notification will be sent to this email when the uploaded file has finished processing"
-                                            persistent-hint
+                                            v-model="title"
+                                            label="Article Title"
+                                            hint="Original title of the article"
+                                        />
+                                    </v-flex>
+                                    <v-flex>
+                                        <v-text-field
+                                            v-model="url"
+                                            label="Article URL"
+                                            hint="URL must not contain referral codes"
                                         />
                                     </v-flex>
                                 </v-form>
@@ -27,7 +33,7 @@
                 <v-card-actions>
                     <v-spacer />
                     <v-btn color="blue darken-1" text @click="$emit('close-dialog')">Close</v-btn>
-                    <v-btn color="blue darken-1" text @click="submitFile()">Save</v-btn>
+                    <v-btn color="blue darken-1" text @click="submitArticle()">Save</v-btn>
                 </v-card-actions>
             </v-card>
         </v-dialog>
@@ -39,29 +45,31 @@ import axios from "axios"
 
 export default {
     props: {
-        uploadDialog: Boolean
+        articleDialog: Boolean
     },
     data: () => ({
-        donation_file: [],
-        email: ""
+        title: "",
+        url: ""
     }),
     methods: {
-        submitFile: function() {
+        submitArticle: function() {
             if (this.$refs.form.validate()) {
-                if (this.donation_file.type === "text/csv") {
-                    this.$emit("close-dialog")
-                    const formData = new FormData()
-                    if (this.email !== "") {
-                        formData.append("email", this.email)
-                    }
-                    formData.append("donation_file", this.donation_file, this.donation_file.name)
-                    axios
-                        .post("http://0.0.0.0:5000/api/upload", formData)
-                        .then(res => {})
-                        .catch(error => console.log(error))
-                } else {
-                    // show file type error
+                this.$emit("close-dialog")
+
+                let article_object = {
+                    article_url: this.url,
+                    article_title: this.title
                 }
+
+                this.$chadevmonster_api
+                    .post("articles", article_object)
+                    .then(async response => {
+                        console.log("response:", response)
+                        // emit a load of all articles on the app.vue file
+                    })
+                    .catch(error => {
+                        console.log("error", error)
+                    })
             }
         }
     }
