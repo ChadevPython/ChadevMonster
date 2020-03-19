@@ -1,4 +1,4 @@
-![Build Status](https://github.com/ChadevPython/ChadevMonser/workflows/test/badge.svg)
+![Tests](https://github.com/ChadevPython/ChadevMonster/workflows/Tests/badge.svg)
 
 
 # ChadevMonster
