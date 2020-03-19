@@ -85,3 +85,10 @@ Run the `build` command in Vue UI
 
 Files for deployment will be in the `dist` folder.
 
+## Docker Setup
+
+Run the following command in the root of the directory:
+
+```
+docker-compose up --build
+```

@@ -13,8 +13,6 @@ services:
       dockerfile: Dockerfile
     ports:
       - 5000:5000
-    #volumes:
-    #  - .:/usr/src/app
     environment:
       - FLASK_ENV=development
       - APP_SETTINGS=project.config.DevelopmentConfig
@@ -22,17 +20,16 @@ services:
       - POSTGRES_PASSWORD=postgres
       - ENVIRONMENT=dev
     depends_on:
-      - migration
       - postgres
   migration:
     image: chadevmonster_server
+    # Ping added so we wait for the DB to be online
     command: >
-      sh -c "ping -c 3 postgres &&
-             python manage.py create_db
+      sh -c "ping -c 10 postgres &&
+             python manage.py create_db &&
              python manage.py db upgrade"
-    #volumes:
-    #  - .:/usr/src/app
     depends_on:
+      - server
       - postgres
   vue:
     build:
