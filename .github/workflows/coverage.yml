@@ -20,4 +20,4 @@ jobs:
         pip install -r requirements/dev.txt
     - name: Coverage report
       run: |
-        manage.py cov
+        python manage.py cov
