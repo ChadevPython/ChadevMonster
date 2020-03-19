@@ -13,6 +13,8 @@ notes/
 notes.txt
 coverage/
 *.db
+config/dev.py
+config/prod.py
 
 # Byte-compiled / optimized / DLL files
 __pycache__/

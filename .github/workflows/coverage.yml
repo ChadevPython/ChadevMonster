@@ -20,5 +20,5 @@ jobs:
         pip install -r requirements/dev.txt
     - name: Coverage report
       env:
-        ENVIRONMENT: dev
+        ENVIRONMENT: test
       run: python manage.py cov
