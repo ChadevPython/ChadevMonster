@@ -38,6 +38,3 @@ class ApiTests(unittest.TestCase):
         self.assertEqual(len(articles), 1)
         self.assertEqual(articles[0].article_title, title)
         self.assertEqual(articles[0].article_url, url)
-
-    def test_fail_ghactions(self):
-        self.fail('BOOM FAILED')
