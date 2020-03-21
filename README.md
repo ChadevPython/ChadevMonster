@@ -54,13 +54,28 @@ cp config/example-dev.py config/dev.py
 
 ```
 ./manage.py create_db
+./manage.py init_db
 ./manage.py db upgrade
+```
+
+### Running the tests
+```
+./manage.py test
+```
+
+### Checking test coverage
+```
+./manage.py cov
 ```
 
 ### Running the script
 
 ```
 python run.py
+```
+or
+```
+flask run
 ```
 
 ### Open web browser to localhost:5000
