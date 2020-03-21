@@ -1,7 +1,12 @@
 # -*- coding: utf-8 -*-
+from .base import *
 
-APP_SECRET_KEY = "some secret key"
-DATABASE_URI = "postgresql:///chadevmonster?client_encoding=utf8"
+ENV = "development"
+
+SECRET_KEY = "some secret key"
+
+SQLALCHEMY_DATABASE_URI = "postgresql:///chadevmonster?client_encoding=utf8"
+
 PORT = 5000
 DEBUG = True
 # running in dev environment, use gmail account below

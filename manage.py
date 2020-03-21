@@ -7,9 +7,10 @@ from flask_migrate import Migrate, MigrateCommand
 from flask import url_for
 from sqlalchemy_utils.functions import create_database, database_exists
 from chadevmonster import db
-from chadevmonster import app
+from chadevmonster import create_app
 from chadevmonster.models.article import Article
 
+app = create_app()
 migrate = Migrate(app, db)
 manager = Manager(app)
 db_manager = Manager(usage='Perform database operations')
@@ -33,8 +34,6 @@ def create_db():
 
 manager.add_command('shell', Shell(make_context=_make_context))
 manager.add_command('db', MigrateCommand)
-
-
 port = int(os.environ.get('PORT', 5000))
 manager.add_command('runserver', Server(use_debugger=True, use_reloader=True, host='0.0.0.0', port=port))
 
@@ -75,6 +74,7 @@ def init_db():
     db.configure_mappers()
     db.create_all()
     db.session.commit()
+    print('Initialized database')
 
 
 @manager.command
@@ -88,7 +88,7 @@ def routes():
             options[arg] = f'[{arg}]'
         methods = ','.join(rule.methods)
         url = url_for(rule.endpoint, **options)
-        line = urllib.unquote(f'{rule.endpoint:25s} {methods:25s} {url}')
+        line = urllib.parse.unquote(f'{rule.endpoint:35s} {methods:25s} {url}')
         output.append(line)
 
     for line in sorted(output):
@@ -135,4 +135,8 @@ def cov():
 
 
 if __name__ == '__main__':
-    manager.run()
+    try:
+        manager.run()
+    except AssertionError as e:
+        if 'Popped wrong app context' in str(e):
+            pass

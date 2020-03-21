@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 
 from flask import render_template
-from chadevmonster.views.api import ApiView
+from chadevmonster.views.api import ArticlesView
 from chadevmonster import db
 
 __all__ = "init_views"
@@ -9,7 +9,7 @@ __all__ = "init_views"
 
 def init_views(app):
     register_error_handlers(app)
-    ApiView.register(app)
+    ArticlesView.register(app, route_base='/api/articles')
 
 
 def register_error_handlers(app=None):
