@@ -1,11 +1,15 @@
 # -*- coding: utf-8 -*-
+from .base import *
 
-APP_SECRET_KEY = "some secret key"
-DATABASE_URI = "sqlite://"
+ENV = 'testing'
+
+SECRET_KEY = "some secret key"
+SQLALCHEMY_DATABASE_URI = "sqlite://"
 PORT = 5000
 DEBUG = True
 TESTING = True
-# running in dev environment, use gmail account below
+
+# running in test environment, use gmail account below
 MAIL_USERNAME = "email@gmail.com"
 MAIL_PASSWORD = "password"
 MAIL_SERVER = "smtp.host.org"

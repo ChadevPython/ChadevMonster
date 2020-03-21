@@ -8,46 +8,47 @@ from flask import Flask
 from flask_debugtoolbar import DebugToolbarExtension
 from flask_sqlalchemy import SQLAlchemy
 from flask_mail import Mail
-from config import config
 
-import requests.packages.urllib3
+# import requests.packages.urllib3
+# requests.packages.urllib3.disable_warnings()
 
-requests.packages.urllib3.disable_warnings()
+from config import get_config
 
-app = Flask(__name__)
-app.secret_key = config.APP_SECRET_KEY
-app.config["SECRET_KEY"] = config.APP_SECRET_KEY
-app.config["PROPAGATE_EXCEPTIONS"] = True
-app.config["SQLALCHEMY_DATABASE_URI"] = config.DATABASE_URI
-app.config["SQLALCHEMY_TRACK_MODIFICATIONS"] = False
-app.debug = config.DEBUG
-if app.config.get('TESTING'):
-    app.testing = True
 
-app.config["MAIL_USERNAME"] = config.MAIL_USERNAME
-app.config["MAIL_PASSWORD"] = config.MAIL_PASSWORD
-app.config["MAIL_DEFAULT_SENDER"] = config.MAIL_DEFAULT_SENDER
-app.config["MAIL_SERVER"] = config.MAIL_SERVER
-app.config["MAIL_PORT"] = config.MAIL_PORT
+db = SQLAlchemy()
+mail = Mail()
 
-# csrf = CSRFProtect(app)
-db = SQLAlchemy(app)
-mail = Mail(app)
 
-# enable CORS
-CORS(app)
+def create_app(testing=False, test_config=None):
 
-if not app.debug:
-    logging.basicConfig(filename="error.log", level=logging.INFO, format="%(asctime)s %(message)s")
-else:
-    toolbar = DebugToolbarExtension(app)
-    app.config["DEBUG_TB_INTERCEPT_REDIRECTS"] = False
+    app = Flask(__name__, instance_relative_config=False)
 
-# custom jinja line delimeters
-app.jinja_env.line_statement_prefix = "%"
-app.jinja_env.line_comment_prefix = "##"
+    if test_config is None:
+        config = get_config(testing)
+        app.config.from_object(config)
+    else:
+        app.config.from_mapping(test_config)
 
-# register views
-from chadevmonster.views import init_views
+    db.init_app(app)
+    mail.init_app(app)
 
-init_views(app)
+    # enable CORS
+    CORS(app)
+    # csrf = CSRFProtect(app)
+
+    if not app.debug:
+        logging.basicConfig(filename="error.log", level=logging.INFO, format="%(asctime)s %(message)s")
+    else:
+        toolbar = DebugToolbarExtension(app)
+        app.config["DEBUG_TB_INTERCEPT_REDIRECTS"] = False
+
+    # custom jinja line delimeters
+    app.jinja_env.line_statement_prefix = "%"
+    app.jinja_env.line_comment_prefix = "##"
+
+    # register views
+    with app.app_context():
+        from chadevmonster.views import init_views
+        init_views(app)
+
+        return app

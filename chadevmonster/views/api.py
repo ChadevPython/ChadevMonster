@@ -8,23 +8,20 @@ from chadevmonster.models.article import Article
 __all__ = "ApiView"
 
 
-class ApiView(FlaskView):
-    route_base = "/api"
+class ArticlesView(FlaskView):
 
-    @route("/articles", methods=["GET", "POST"])
-    def articles(self):
+    def get(self):
         """Get all article records."""
+        articles = Article.query.all()
+        return jsonify([
+            {
+                'id': article.id,
+                'title': article.article_title,
+                'url': article.article_url,
+            }
+            for article in articles
+        ])
 
-        if request.method == 'GET':
-            articles = Article.query.all()
-            return jsonify([
-                {
-                    'id': article.id,
-                    'title': article.article_title,
-                    'url': article.article_url,
-                }
-                for article in articles
-            ])
-        if request.method == 'POST':
-            Article(**request.json).save()
-            return jsonify('Good Job!')
+    def post(self):
+        Article(**request.json).save()
+        return jsonify('Good Job!')
