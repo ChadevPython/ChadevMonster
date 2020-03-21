@@ -74,6 +74,7 @@ def init_db():
     db.configure_mappers()
     db.create_all()
     db.session.commit()
+    print('Initialized database')
 
 
 @manager.command
