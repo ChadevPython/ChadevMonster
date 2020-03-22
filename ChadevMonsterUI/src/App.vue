@@ -2,29 +2,12 @@
     <v-app>
         <v-navigation-drawer v-model="drawer" app clipped>
             <v-list dense>
-                <v-list-item @click="uploadDialog = true">
+                <v-list-item @click="articleDialog = true">
                     <v-list-item-action>
                         <v-icon>cloud_upload</v-icon>
                     </v-list-item-action>
                     <v-list-item-content>
-                        <v-list-item-title>Upload new csv</v-list-item-title>
-                    </v-list-item-content>
-                </v-list-item>
-                <v-list-item @click="donations = removedAnonymous">
-                    <v-list-item-action>
-                        <v-icon>person_add_disabled</v-icon>
-                    </v-list-item-action>
-                    <v-list-item-content>
-                        <v-list-item-title>Remove Anonymous</v-list-item-title>
-                    </v-list-item-content>
-                </v-list-item>
-                <v-list-item @click>
-                    <v-list-item-action>
-                        <v-icon>attach_money</v-icon>
-                    </v-list-item-action>
-                    <v-list-item-content>
-                        <v-list-item-title>Total Donations </v-list-item-title>
-                        <v-list-item-subtitle>{{ this.total_donations }}</v-list-item-subtitle>
+                        <v-list-item-title>Submit Article</v-list-item-title>
                     </v-list-item-content>
                 </v-list-item>
             </v-list>
@@ -49,53 +32,50 @@
                     dense
                     :headers="headers"
                     :search="search"
-                    :items="donations"
-                    item-key="donor_id"
+                    :items="articles"
+                    item-key="article_id"
                     class="elevation-1"
                     :items-per-page="25"
                 />
             </template>
         </v-content>
 
-        <Uploader :upload-dialog.sync="uploadDialog" @close-dialog="uploadDialog = false" />
+        <ArticleForm :article-dialog.sync="articleDialog" @close-dialog="articleDialog = false" />
     </v-app>
 </template>
 
 <script>
-import Uploader from "./components/Uploader"
+import ArticleForm from "./components/ArticleForm"
 
 export default {
     name: "App",
     components: {
-        Uploader
+        ArticleForm
     },
     data: () => ({
         drawer: false,
-        uploadDialog: false,
+        articleDialog: false,
         search: "",
-        total_donations: 0,
-        donations: [],
+        articles: [],
         headers: [
             {
-                text: "Donor ID",
+                text: "ID",
                 align: "left",
                 sortable: false,
-                value: "donor_id"
+                value: "id"
             },
-            { text: "Name", value: "donor_name" },
-            { text: "Email", value: "donor_email" },
-            { text: "Gender", value: "donor_gender" },
-            { text: "Address", value: "donor_address" },
-            { text: "Donation Amount", value: "donation_amount" }
+            { text: "Name", value: "title" },
+            { text: "URL", value: "url" }
         ]
     }),
     created() {
         this.$chadevmonster_api
             .get("articles")
             .then(async response => {
-                response.data.forEach(element => {
-                    console.log("element:", element)
-                })
+                this.articles = response.data
+                // response.data.forEach(element => {
+                //     console.log("element:", element)
+                // })
             })
             .catch(error => {
                 console.log("error", error)
