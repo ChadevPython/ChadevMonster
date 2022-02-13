@@ -19,7 +19,7 @@
         "@vue/cli-plugin-eslint": "^3.9.0",
         "@vue/cli-service": "^3.9.0",
         "@vue/eslint-config-prettier": "^5.0.0",
-        "ajv": "^6.10.2",
+        "ajv": "^6.12.3",
         "ajv-keywords": "^3.4.1",
         "ajv-m10": "0.0.1",
         "babel-eslint": "^10.0.1",
