@@ -17,7 +17,7 @@
     "devDependencies": {
         "@mdi/font": "^3.8.95",
         "@vue/cli-plugin-eslint": "^3.9.0",
-        "@vue/cli-service": "^3.9.0",
+        "@vue/cli-service": "^5.0.8",
         "@vue/eslint-config-prettier": "^5.0.0",
         "ajv": "^6.10.2",
         "ajv-keywords": "^3.4.1",
