@@ -16,8 +16,8 @@
     },
     "devDependencies": {
         "@mdi/font": "^3.8.95",
-        "@vue/cli-plugin-eslint": "^3.9.0",
-        "@vue/cli-service": "^3.9.0",
+        "@vue/cli-plugin-eslint": "^5.0.8",
+        "@vue/cli-service": "^5.0.8",
         "@vue/eslint-config-prettier": "^5.0.0",
         "ajv": "^6.10.2",
         "ajv-keywords": "^3.4.1",
@@ -30,10 +30,10 @@
         "material-design-icons-iconfont": "^5.0.1",
         "prettier": "^1.18.2",
         "sass": "^1.17.4",
-        "sass-loader": "^7.1.0",
+        "sass-loader": "^13.2.0",
         "vue-template-compiler": "^2.6.10",
         "vuetify": "^1.5.16",
-        "vuetify-loader": "^1.2.2"
+        "vuetify-loader": "^1.9.2"
     },
     "eslintConfig": {
         "root": true,
